@@ -1,1 +1,5 @@
 theme: jekyll-theme-slate
+title: Opemipo
+name: Opemipo's writings
+url: https://opemipo.dev
+feed_items: 10

@@ -1,7 +1,7 @@
 # How I implemented the JSON specification in Go and what I learned
 
-Why bother?
-Deliberate practice. I have read and thought a lot about software engineering but I realise that to really gain insights I need to try out the ideas I have come across. The JSON specification is ideal because compared to a real project that has varying requirements and with pressures. This is very well defined and relatively simple. It is also so I could practise Go. I should be a lot more confident about Go by the end of this. So let’s dive in!
+# Why bother?
+Deliberate practice. I have read and thought a lot about software engineering but I realise that to really gain insights I need to try out the ideas I have come across. The JSON specification is ideal because compared to a real project that has varying requirements and pressures. This is very well defined and relatively simple. I also wrote this so I could practise Go. I should be a lot more confident about Go by the end of this. So let’s dive in!
 
 ## The Process
 # Step 1 - MVP
