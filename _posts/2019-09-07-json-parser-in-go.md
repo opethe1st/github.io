@@ -6,23 +6,36 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 # Introduction
-Hey! Welcome to my first blog post on how I wrote a JSON parser. To follow along properly, some programming experience is helpful but my goal is to make this as easy to follow as possible. If you don't know what JSON is, the best resource on it is [this](https://www.json.org). It has really lovely diagrams that clearly show what's allowed in JSON.
+Hey! Welcome to my first blog post on how I wrote a JSON [parser](https://en.wikipedia.org/wiki/Parsing).
 
-The posts reconstruct the process through which I wrote the parser. It's not a perfect reconstruction because although I have a commit history that I have referenced and some original notes, some time has passed between writing the code and writing this post. The lesson for next time is to write some code and then write a post about it as soon as possible.
+In the posts in this series, I will reconstruct the process through which I wrote it. It's not a perfect reconstruction because although I have a commit [history](https://en.wikipedia.org/wiki/Commit_(version_control)) and some original notes, some time has passed between writing the code and writing these posts. Despite this, I believe it is useful to document not just the end result(i.e working code) but the process (my thoughts, rationale for decisions, order in which I wrote that code etc.) that produced it.
 
-My initial reason for writing a JSON parser was that I was not happy with the error reporting in the standard python library and I thought I could do better.
+That's the main takeway I want readers to leave with.
 
-That's not the major reason I wrote this though. I am all about mastery and one of the vital steps in gaining mastery is deliberate practise. This is an exercise in deliberate practise of software engineering. The goal is to try out ideas that I have and others I have come across and put them to the test in a real project. The other goal was to practise Go with a real project. The desired end result is insights that would help me in writing software.
+My major reason for writing this is to deliberately practise software engineering. By this I mean, trying out software engineering ideas (my ideas and ideas I have come across) in a project and taking note of what works and what doesn't. The other reason was to practise writing Go and practise writing.
 
+
+# JSON
+JSON stands for JavaScript Object Notation. It is a data-interchange format that supports 6 data types.
+* string - starts with a `"` and ends with a `"` plus support for escapes e.g `"string"`, `"key"`
+* number - represents a number e.g `2.4`, `2.0`, `12`
+* boolean - this has only two possible values - `true` and `false`
+* null - it is represented by `null`
+* array - this contains values of other json types in order e.g `["abc", 123, true]`
+* object - this contains key and value pairs (the key must be a string and a value can be any type supported by json) e.g `{"key": 123, "k2": "string"}
+
+for more information, you can check [here](https://www.json.org)
 
 # MVP
-To start, I decided to focus on a supporting a subset of JSON grammar. The goal here is to build a foundation upon which I can progressively support more features without having to modify what already works. The features I decided were the foundation for every thing else were
+For the MVP, I decided to focus on a supporting a subset of JSON grammar. This subset was decided based on what I thought would be a good foundation upon which I could add more features without having to change code that already works.
+Those features were
 * being able to parse strings without escapes
 * being able to parse arrays
 * being able to parse objects
 
 ## Parsing
-The first thing to write was the signature for the parser. I called this `Load` because I was influenced by the python json's libraries naming. The other choices are Parser, Unmarshaller but to be honest when I first wrote this I wasn't thinking too much about naming so I went with what popped in my head first.
+The first thing I did was to design the [public interface](https://en.wikipedia.org/wiki/Public_interface) of the parser. This interface has just one function - `Load`. I called this `Load` because I was influenced by python's json library's naming (I didn't realise it at the time).
+Other names I could have used are Parser and Unmarshaller but to be honest I just went with what popped in my head first. (I eventually changed this name). The other thing was to decide what the function needed to accept and what it needs to return. In this case, it is pretty clear - it receives a string that should conform to the json grammar and returns the object that the string represents according to the JSON grammar.
 
 ```go
 func Load(s string) interface{} {
@@ -30,7 +43,7 @@ func Load(s string) interface{} {
 }
 ```
 
-Next, was to write a dispatch mechanism that handles the different types of objects that can be represented in JSON.
+Next, I wrote a switch statement that calls the right load function based on the type of [value](https://www.json.org/) represented by the string passed to the Load function.
 
 ```go
 func Load(s string) interface{} {
@@ -48,19 +61,19 @@ func Load(s string) interface{} {
 ```
 
 #### Go specific notes:
-> In Go, public functions are functions that start with a capital letter. interface{} is the empty interface that matches anything. If you are alarmed by the use of a name like 's', this is consistent with naming used in Go code that uses shortnames often as long as the scope is small. I used to be anti-shortforms but I can see the point - calling this jsonString instead doesn't result in more clarity.
+> In Go, public functions are functions that start with a capital letter. interface{} is the empty interface that accepts a value of any type. If you are alarmed by the use of a name like 's', this is consistent with naming used in a lot of Go code.  Go programmers use shortnames often as long as the scope where it is used is small. I used to be anti-shortnames but I am more comfortable with it now.
 
-This is written so that when we need to support new types like numbers and literals (null, true, false) we just need to add another case statement and we don't need to modify what already works. I could also have used a map to match check functions (isString, isArray, isObject) to the load functions (loadstring, loadArray, loadObject) but the switch statement works well enough.
+The nice thing about how this code is currently structured is that when we need to support new types, I just need to add another case statement without modifying what already works. I could also have written this such that I had a map from the check functions (functions prefixed with `is` and return a bool that indicates if a string represents a given type) to the corresponding load functions (functions prefixed with `load` that actually return the value represented by the string) but the switch statement works well enough right now.
 
 
 ### String Parsing
-The first step to parsing a string is to check that the string we are given represents a string. The nice thing about json is that if a string starts with a `"` then it's a string. So the isString(s) function is simply
+The first step to parsing a string is to check that the string passed into Load represents a string. It's a string if the first character is a quote so isString is simply this -
 ```go
 func isString(s) bool {
     return s[0] == '"'
 }
 ```
-The loadString function
+The loadString function looks like this
 ```go
 func loadString(s string) (int, interface{}) {
     current := 0
@@ -74,15 +87,18 @@ func loadString(s string) (int, interface{}) {
 	return current + 1, s[start+1 : current]
 }
 ```
+#### Go specific notes:
+> note that loadString starts with a lowercase letter, in Go this means that the function is private which mean can't be used outside the package in which it was defined. This is a good thing because it minimizes what you expose to clients of this package which means that you have more freedom to change implementation details like this function.
 
 ### Array Parsing
-Array parsing happens when Load is given a string that represent an array. Load knows it has a string when the isArray function returns true.
-The isArray function looks like this
+An array is parsed when Load is called with a string argument that represent an array. A string that represents an array starts with `[`. This is checked by the isArray function.
+
 ```go
 func isArray(s) bool {
     return s[0] == '['
 }
 ```
+
 My first version of loadArray function looked like this
 ```go
 func loadArray(s string) []interface{} {
@@ -91,7 +107,7 @@ func loadArray(s string) []interface{} {
 	current++ // move past '['
 	var item interface{}
 	for (current < len(s)) && (s[current] != ']') {
-		item = Load(s)
+		item = Load(s) // load the json value
         if s[current] == ',' {
             current++ // move past ','
         }
@@ -100,11 +116,13 @@ func loadArray(s string) []interface{} {
 	return array
 }
 ```
-but this doesn't work. It works for loading `[]`, and `["abc"]` but once you try to load `["abc", "def"]`. it doesn't work like expected.
+but this doesn't work for all cases. It works for loading `[]`, and `["abc"]` but once you try to load `["abc", "def"]`. it doesn't work like expected. Can you figure out what the problem is?
+
 
 The problem here is that there is no memory of what we have parsed in the string so far. So this line - `item = Load(s)` just keeps picking up the first item.
 
-This highlighed a fundamental flaw in the current program structure. To fix it, I added a current parameter to the functions whose value is the current position in the string and made the loading functions return in addition to what was loaded, the current position. This decision affects all the functions so I had to change them to look like this.
+This is a fundamental design flaw. To fix it, I had to add a current parameter to the all check and load functions. The value of current is the next index of the string that hasn't be parsed. This is a major decision and so I had to modify all the functions to look like the snippet below. Note that the public interface (ie. Load's [function signature](https://en.wikipedia.org/wiki/Type_signature)) didn't need to change at all.
+
 ```go
 func Load(s) interface{} {
     value, _ = load(s, 0)
@@ -165,8 +183,12 @@ This works for
 s = `["abc","def","gef"]`
 and the also for nested arrays like
 s = `["abc",["def",[]]]`
+note that it doesn't support whitespace. so this s = `["abc", "def"]` doesn't work.
+Yay!
+
 ### Object Parsing
 Parsing objects is very similar to parsing arrays. The code looks like this
+
 ```go
 func isObject(s string, current int) {
     return s[current] == '{'
@@ -190,14 +212,20 @@ func loadObject(s string, current int) (map[string]interface{}, int) {
 	return object, current
 }
 ```
+This works for
+s = `{"key":"value","k1":"value2"}`
+and when s represents a nested object
+s = `{"k1":["abc","cde"],"k2":{"k1":"v2"}}`
+
 
 And that's it for the MVP!
 
-It is missing a couple of features but it is a solid foundation for further work. To support numbers, I just need to write an isNumber and loadNumber functions and add them to the case statement just like the rest. When I need to support string escaping, the only thing that needs to change is the loadString function. This code is also very optimistic, it doesn't check for error conditions but that will be handled later.
-
 This is roughly the state at this [commit](https://github.com/opethe1st/GoJson/commit/e0dc214e84a8e40d4607b7cf7b0a115b8222ff11).
-Note that the naming in the commit is a bit different. For example, loadSequence instead of loadArray, this was influenced by previously reading the YAML specification which use the term sequence for array. Same thing for mapping instead of object. Naming is important and I have learned to stick to the names used in a specification so this was eventually fixed in later commits.
+Note that the naming in that commit is a bit different. For example, loadSequence instead of loadArray, this was influenced by previously reading the YAML specification which uses the term sequence for array and mapping for object. Naming is important and I have learned to stick to use consistent names. In this case, I want the names to be consistent with the JSON specification. So this was eventually fixed in later commits. That commit also has the support for handling whitespace which I would be discussed in later posts in this series
 
-I haven't included the support for whitespace feature that is in that commit yet but I will add it in the next post which is going to be about how I refactored this code.
+The next post is going to be about how I refactored this MVP. For example, you would notice that I am passing in `s, current` into all the functions except `Load` is there a missing abstraction that captures what those two variables mean? Also some of the naming is not quite right yet e.g current and Load.
 
 So stay tuned!
+
+-------
+Thanks Vanessa, Adaobi and Memuna for the reviews.
