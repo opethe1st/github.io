@@ -47,7 +47,12 @@ func Load(s string) interface{} {
 Next, I wrote a switch statement that calls the right load function based on the type of [value](https://www.json.org/) represented by the string passed to the Load function.
 
 ```go
-/*In Go, public functions are functions that start with a capital letter. interface{} is the empty interface that accepts a value of any type. If you are alarmed by the use of a name like 's', this is consistent with naming used in a lot of Go code.  Go programmers use shortnames often as long as the scope where it is used is small. I used to be anti-shortnames but I am more comfortable with it now.
+/*In Go, public functions are functions that start with a capital letter.
+interface{} is the empty interface that accepts a value of any type.
+If you are alarmed by the use of a name like 's',
+this is consistent with naming used in a lot of Go code.
+Go programmers use shortnames often as long as the scope where it is used is small.
+I used to be anti-shortnames but I am more comfortable with it now.
 */
 func Load(s string) interface{} {
     switch {
@@ -76,7 +81,10 @@ func isString(s) bool {
 The loadString function looks like this
 ```go
 /*
-note that loadString starts with a lowercase letter, in Go this means that the function is private which mean can't be used outside the package in which it was defined. This is a good thing because it minimizes what you expose to clients of this package which means that you have more freedom to change implementation details like this function.
+note that loadString starts with a lowercase letter,
+in Go this means that the function is private which mean can't be used outside the package in which it was defined.
+This is a good thing because it minimizes what you expose to clients of this package
+which means that you have more freedom to change implementation details like this function.
 */
 func loadString(s string) (int, interface{}) {
     current := 0
@@ -92,7 +100,7 @@ func loadString(s string) (int, interface{}) {
 ```
 
 ### Array Parsing
-An array is parsed when Load is called with a string argument that represent an array. A string that represents an array starts with `[`. This is checked by the isArray function.
+An array is parsed when `Load` is called with a string argument that represent an array. A string that represents an array starts with `[`. This is checked by the isArray function.
 
 ```go
 func isArray(s) bool {
@@ -122,7 +130,7 @@ but this doesn't work for all cases. It works for loading `[]`, and `["abc"]` bu
 
 The problem here is that there is no memory of what we have parsed from the string so far. This means that this line - `item = Load(s)` just keeps picking up the first item.
 
-This is a fundamental design flaw. To fix it, I had to add a parameter called current that's an `int` to the all check and load functions. The value of current is the next index of the string that hasn't yet been parsed. This is a major decision so I had to modify all the functions so they look like in the snippet belw. Note that the public interface (ie. Load's [function signature](https://en.wikipedia.org/wiki/Type_signature)) didn't need to change at all.
+This is a fundamental design flaw. To fix it, I had to add a parameter called current that's an `int` to the all check and load functions. The value of current is the next index of the string that hasn't yet been parsed. This is a major decision so I had to modify all the functions so they look like in the snippet below. Note that the public interface (ie. Load's [function signature](https://en.wikipedia.org/wiki/Type_signature)) didn't need to change at all.
 
 ```go
 func Load(s) interface{} {
@@ -222,9 +230,9 @@ and when s represents a nested object
 And that's it for the MVP!
 
 This is roughly the state at this [commit](https://github.com/opethe1st/GoJson/commit/e0dc214e84a8e40d4607b7cf7b0a115b8222ff11).
-Note that the naming in that commit is a bit different. For example, loadSequence instead of loadArray, this was influenced by previously reading the YAML specification which uses the term sequence for array and mapping for object. Naming is important and I have learned to stick to use consistent names. In this case, I want the names to be consistent with the JSON specification. So this was eventually fixed in later commits. That commit also has support for handling whitespace which I would discuss in later posts in this series
+Note that the naming in that commit is a bit different. For example, loadSequence instead of loadArray and loadMapping instead of loadObject. This was influenced by previously reading the YAML specification which uses the term sequence for array and mapping for object. Naming is important and I have learned to stick to consistent names. In this case, I want the names to be consistent with the JSON specification. That commit also has support for handling whitespace which I would discuss in later posts in this series.
 
-The next post is going to be about how I refactored this MVP. For example, you would notice that I am passing in `s, current` into all the functions except `Load` is there a missing abstraction that captures what those two variables mean? Also some of the naming is not quite right yet e.g current and Load.
+The next post is going to be about how I refactored this MVP. For example, you would notice that I am passing in `s, current` into all the functions except `Load` is there a missing abstraction that captures what those two variables mean? Also some of the naming is not quite right yet e.g current and Load, can I come up with better names?
 
 So stay tuned!
 
