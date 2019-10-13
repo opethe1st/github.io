@@ -6,9 +6,9 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 # Introduction
-Hey! Welcome to my first blog post on how I wrote a JSON parser. To follow along properly, some programming experience is helpful but my goal is to make this as easy to follow as possible. If you don't know what JSON is, the best resource on it is [this](json.org). It has really lovely diagrams that clearly show what's allowed in JSON.
+Hey! Welcome to my first blog post on how I wrote a JSON parser. To follow along properly, some programming experience is helpful but my goal is to make this as easy to follow as possible. If you don't know what JSON is, the best resource on it is [this](https://www.json.org). It has really lovely diagrams that clearly show what's allowed in JSON.
 
-The posts reconstruct the process through which I wrote the parser. It's not a perfect reconstruction because although I have a commit history that I have referenced and some original notes, some time has passed between writing the code and writing this post. The lesson next time is to write some code and then write a post about it as soon as possible.
+The posts reconstruct the process through which I wrote the parser. It's not a perfect reconstruction because although I have a commit history that I have referenced and some original notes, some time has passed between writing the code and writing this post. The lesson for next time is to write some code and then write a post about it as soon as possible.
 
 My initial reason for writing a JSON parser was that I was not happy with the error reporting in the standard python library and I thought I could do better.
 
@@ -16,13 +16,13 @@ That's not the major reason I wrote this though. I am all about mastery and one 
 
 
 # MVP
-To start, I decided to focus on a supporting a subset of JSON. The goal here is to build a foundation upon which I can progressively support more features without having to modify what already works. The features I decided were the foundation for every thing else are
+To start, I decided to focus on a supporting a subset of JSON grammar. The goal here is to build a foundation upon which I can progressively support more features without having to modify what already works. The features I decided were the foundation for every thing else were
 * being able to parse strings without escapes
 * being able to parse arrays
 * being able to parse objects
 
 ## Parsing
-The first thing was to write was the signature for the parser. I called this `Load` because I was influenced by the python json's libraries naming. The other choices are Parser, Unmarshaller but to be honest when I first wrote this I wasn't thinking too much about naming so I went with what popped in my head first.
+The first thing to write was the signature for the parser. I called this `Load` because I was influenced by the python json's libraries naming. The other choices are Parser, Unmarshaller but to be honest when I first wrote this I wasn't thinking too much about naming so I went with what popped in my head first.
 
 ```go
 func Load(s string) interface{} {
@@ -193,11 +193,11 @@ func loadObject(s string, current int) (map[string]interface{}, int) {
 
 And that's it for the MVP!
 
-It is missing a couple of features but it is solid foundation for further work. To support numbers, I just need to write a isNumber and loadNumber function and add them to the case statement just like the rest. When I need to support string escaping, the only thing that needs to change is the loadString function. This code is also very optimistic, it doesn't check for error conditions but that will be handeled later.
+It is missing a couple of features but it is a solid foundation for further work. To support numbers, I just need to write an isNumber and loadNumber functions and add them to the case statement just like the rest. When I need to support string escaping, the only thing that needs to change is the loadString function. This code is also very optimistic, it doesn't check for error conditions but that will be handled later.
 
 This is roughly the state at this [commit](https://github.com/opethe1st/GoJson/commit/e0dc214e84a8e40d4607b7cf7b0a115b8222ff11).
-Note that, the naming in the commit is a bit different for example, loadSequence instead of loadArray, this was influenced by previously reading the YAML specification which use the term sequence for array. Same thing for mapping instead of object. Naming is important and I have learned to stick to the names used in a specification so this was eventually fixed in later commits.
+Note that the naming in the commit is a bit different. For example, loadSequence instead of loadArray, this was influenced by previously reading the YAML specification which use the term sequence for array. Same thing for mapping instead of object. Naming is important and I have learned to stick to the names used in a specification so this was eventually fixed in later commits.
 
-I haven't included the support for whitespace feature that is in that commit yet. but I will add it in the next post which is going to be about how I refactored this code.
+I haven't included the support for whitespace feature that is in that commit yet but I will add it in the next post which is going to be about how I refactored this code.
 
 So stay tuned!
