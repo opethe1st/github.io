@@ -1,18 +1,18 @@
 ---
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 1"
-date:   2019-09-29 14:49:25 +0100
+date:   2019-10-13 14:49:25 +0100
 categories: [Go, Kata, Json, Parser]
 ---
 
 # Introduction
-Hey! Welcome to my first blog post on how I wrote a JSON [parser](https://en.wikipedia.org/wiki/Parsing).
+Hey! Welcome to my first blog post in a series about how I wrote a JSON [parser](https://en.wikipedia.org/wiki/Parsing). This series assumes the reader has some basic programming experience. In this post, I will be talking about how I wrote a [MVP](https://en.wikipedia.org/wiki/Minimum_viable_product) JSON parser
 
 In the posts in this series, I will reconstruct the process through which I wrote it. It's not a perfect reconstruction because although I have a commit [history](https://en.wikipedia.org/wiki/Commit_(version_control)) and some original notes, some time has passed between writing the code and writing these posts. Despite this, I believe it is useful to document not just the end result(i.e working code) but the process that produced it. (my thoughts, rationale for decisions, order in which I wrote that code etc.)
 
 That's the main takeway I want readers to leave with.
 
-My major reason for writing this is to deliberately practise software engineering. By this I mean, trying out software engineering ideas (my ideas and ideas I have come across) in a project and taking note of what works and what doesn't. The other reason was to practise writing Go and practise writing.
+My major reason for writing this was to deliberately practise software engineering; by this I mean, to try out software engineering ideas (my ideas and ideas I have come across) in a project and take note of what works and what doesn't. The other reason was to practise writing Go and practise writing.
 
 
 # JSON
