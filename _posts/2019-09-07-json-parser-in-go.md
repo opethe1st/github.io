@@ -236,7 +236,7 @@ And that's it for the MVP!
 This is roughly the state at this [commit](https://github.com/opethe1st/GoJson/commit/e0dc214e84a8e40d4607b7cf7b0a115b8222ff11).
 Note that the naming in that commit is a bit different. For example, loadSequence instead of loadArray and loadMapping instead of loadObject. This was influenced by previously reading the YAML specification which uses the term sequence for array and mapping for object. Naming is important and I have learned to stick to consistent names. In this case, I want the names to be consistent with the JSON specification. That commit also has support for handling whitespace which I would discuss in later posts in this series.
 
-The next post is going to be about how I refactored this MVP. For example, you would notice that I am passing in `s, current` into all the functions except `Load`. Is there a missing abstraction that captures what those two variables mean? Also some of the naming is not quite right yet e.g current and Load, can I come up with better names?
+The next [post](https://opethe1st.github.io/go/kata/json/parser/2019/11/19/refactoring-json-parser.html) is going to be about how I refactored this MVP. For example, you would notice that I am passing in `s, current` into all the functions except `Load`. Is there a missing abstraction that captures what those two variables mean? Also some of the naming is not quite right yet e.g current and Load, can I come up with better names?
 
 Stay tuned!
 
