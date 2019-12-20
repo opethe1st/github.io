@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 3 - More features"
-date:   2019-11-19 14:49:25 +0100
+date:   2019-12-20 14:49:25 +0100
 categories: [Go, Kata, Json, Parser]
 ---
 
@@ -72,8 +72,11 @@ The code for this can be found [here](https://github.com/opethe1st/GoJson/commit
 That's all of the features in the JSON specification. 😄.
 
 Notice that to add these new features I didn't have to change already working code and I had tests to prove that it all works like expected.
+
 That's the all, right?
+
 Wrong.
-The next step when writing a library is to benchmark it and then try to optimise. I was curious how my code compared with the standard libraries implementation. That's the topic for the next blog post.
+
+The next step when writing a library is to benchmark it and then optimise. I was curious how my code compared with the standard libraries implementation. This step is the subject of the next blog post
 
 Stay tuned!
