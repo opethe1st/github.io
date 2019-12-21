@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How I wrote a JSON parser in Go - Part 2"
+title:  "How I wrote a JSON parser in Go - Part 2 - Refactoring"
 date:   2019-11-19 14:49:25 +0100
 categories: [Go, Kata, Json, Parser]
 ---

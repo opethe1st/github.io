@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How I wrote a JSON parser in Go - Part 1"
+title:  "How I wrote a JSON parser in Go - Part 1 - MVP"
 date:   2019-10-13 14:49:25 +0100
 categories: [Go, Kata, Json, Parser]
 ---
