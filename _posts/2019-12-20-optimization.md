@@ -6,7 +6,6 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 
-# Optimization
 In the last [post](https://opethe1st.github.io/go/kata/json/parser/2019/12/20/adding-more-features.html), I talked about how I implemented all the features in the JSON specification.
 That's nice but I was curious to see how my implementation compared performance wise with the existing standard library implementation.
 
