@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 4 - Optimization"
-date:   2019-12-19 14:49:25 +0100
+date:   2019-12-20 15:49:25 +0100
 categories: [Go, Kata, Json, Parser]
 ---
 
