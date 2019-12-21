@@ -77,5 +77,5 @@ I rewrote all the functions that previously accepted (s string, current int) to 
 
 This is the state at this [commit](https://github.com/opethe1st/GoJson/commit/c7e59fb537ee6e05b06ad6638d8ab55c792b0571).
 
-In the next [post](https://opethe1st.github.io/go/kata/json/parser/2019/11/19/adding-more-features.html) I will talk about how I added support for the other features
+In the next [post](https://opethe1st.github.io/go/kata/json/parser/2019/12/20/adding-more-features.html) I will talk about how I added support for the other features
 in the JSON specification. This will show that my approach still works when I implement more features - without having to change what currently works. This is a desirable quality when writing code.

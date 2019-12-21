@@ -77,6 +77,6 @@ That's the all, right?
 
 Wrong.
 
-The next step when writing a library is to benchmark it and then optimise. I was curious how my code compared with the standard libraries implementation. This step is the subject of the next blog post
+The next step when writing a library is to benchmark it and then optimise. I was curious how my code compared with the standard libraries implementation. This step is the subject of the next blog [post](https://opethe1st.github.io/go/kata/json/parser/2019/12/20/optimization.html)
 
 Stay tuned!
