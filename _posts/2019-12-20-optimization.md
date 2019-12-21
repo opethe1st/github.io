@@ -34,6 +34,7 @@ for i := range(1000){
 }
 ```
 it is going to be slow because allocations take time. I certainly wasn't thinking about that before. Once this was fixed, the performance of the two implementations was comparable. My job was done!
+The code for this is [here](https://github.com/opethe1st/GoJson/commit/7dd0b3ca48d4dd887e373f6677bbef261a18e688)
 
 Json parser ✅
 
