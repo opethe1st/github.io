@@ -11,7 +11,7 @@ Hey! Welcome to my first blog post in a series about how I wrote a [JSON](https:
 In the posts in this series, I will reconstruct the process through which I wrote the parser. It's not a perfect reconstruction because although I have a commit [history](https://en.wikipedia.org/wiki/Commit_(version_control)) and some original notes, some time has passed between writing the code and writing these posts. Despite this, I believe it is useful to document not just the end result(i.e working code) but the process that produced it. (my thoughts, rationale for decisions, order in which I wrote that code etc.)
 
 That's the main takeway I want my readers to leave with.
-
+<!--description-->
 My major reason for writing this was to deliberately practise software engineering; by this I mean, to try out software engineering ideas (my ideas and ideas I have come across) in a project and take note of what works and what doesn't. The other reasons were to practise writing Go and practise writing.
 
 

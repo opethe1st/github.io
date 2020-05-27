@@ -14,6 +14,7 @@ without any side-effects.
 Different languages support different styles of programming. To learn functional programming, I needed to learn a language that supports the
 functional style. There are a number of functional languages - F#, Scala, Haskell, Elm. I decided to go with Haskell because from what I read it was the "purest" of the functional languages. For example, with haskell you cannot have any side-effects while with some functional languages you can.
 
+<!--description-->
 ## Haskell
 Haskell is a typeful, lazily-evaluated functional language.
 

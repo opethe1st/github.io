@@ -6,7 +6,7 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 So what were the main lessons I learned from this?
-
+<!--description-->
 # Software engineering lessons
 
 I feel like I have a solid grasp on how to write libraries. My process is: -

@@ -9,6 +9,7 @@ categories: [Go, Kata, Json, Parser]
 In the previous [post](https://opethe1st.github.io/go/kata/json/parser/2019/10/13/json-parser-in-go.html), I talked about how I wrote a minimal viable parser
 i.e one that could parse in strings, arrays and objects. It works as advertised but I noticed there were a couple of things I could do to improve on the code before I added more features from the JSON specification.
 
+<!--description-->
 ### Abstractions wanted
 
 So one of the things I noticed was that almost all functions have this input signature - `(s string, current int)`. This was a clue that there was a missing abstraction.
