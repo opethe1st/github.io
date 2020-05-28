@@ -9,10 +9,10 @@ categories: [Go, Kata, Json, Parser]
 In the previous [post](https://opethe1st.github.io/go/kata/json/parser/2019/10/13/json-parser-in-go.html), I talked about how I wrote a minimal viable parser
 i.e one that could parse in strings, arrays and objects. It works as advertised but I noticed there were a couple of things I could do to improve on the code before I added more features from the JSON specification.
 
-<!--description-->
 ### Abstractions wanted
 
 So one of the things I noticed was that almost all functions have this input signature - `(s string, current int)`. This was a clue that there was a missing abstraction.
+<!--description-->
 #### What does s and current represent?
 s is the entire string to be parsed and current is the next index of that string that has not yet been parsed. Conceptually, they are related.
 For example, it doesn't make sense for current to be a negative number since it represents a position in a string. It also doesn't make sense for it to be greater than the length of s either. So what is the right abstraction for both variables?

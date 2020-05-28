@@ -6,7 +6,7 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 So what were the main lessons I learned from this?
-<!--description-->
+
 # Software engineering lessons
 
 I feel like I have a solid grasp on how to write libraries. My process is: -
@@ -15,7 +15,7 @@ I feel like I have a solid grasp on how to write libraries. My process is: -
 * refactor your code - if there are missing abstractions add them, if you took shortcuts fix them
 * add more features and refactor again if necessary
 * optimize space and time
-
+<!--description-->
 I also learned that a domain driven design mindset is very helpful. By this I mean in particular writing code that mirrors the domain(or problem space) closely. In this case, the domain is the JSON specification and my code corresponds to it as much as possible. I used the same names and if you check [json.org](json.org), even the structure is similar to the diagrams explaining the specification.
 This is very important.
 

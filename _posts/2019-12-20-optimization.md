@@ -8,11 +8,11 @@ categories: [Go, Kata, Json, Parser]
 
 In the last [post](https://opethe1st.github.io/go/kata/json/parser/2019/12/20/adding-more-features.html), I talked about how I implemented all the features in the JSON specification.
 That's nice but I was curious to see how my implementation compared performance wise with the existing standard library implementation.
-<!--description-->
+
 One of the clues that I had a performance problem was when I tried to compare the time it takes to load two huge strings when my code was at this [state](https://github.com/opethe1st/GoJson/commit/943435f24b71ab954f52d910ed0931816e51ead5).
 My implementation took forever to load it and I had no idea why. After a bit of guessing, I still couldn't figure it out so I wrote benchmarks.
 Go has builtin support for benchmarks. A benchmark looks like this.
-
+<!--description-->
 ```go
 func BenchmarkMyMapOfString(b *testing.B) {
 	b.ReportAllocs()

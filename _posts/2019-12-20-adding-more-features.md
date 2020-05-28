@@ -6,11 +6,11 @@ categories: [Go, Kata, Json, Parser]
 ---
 
 In the previous [post](https://opethe1st.github.io/go/kata/json/parser/2019/11/19/refactoring-json-parser.html), I wrote about how I added the iterator abstraction. In this one, I will be discussing how I added new features.
-<!--description-->
+
 # Parsing null, true and false
 The first thing I noticed was that to parse null, true and false, I could use the same function which I called `loadKeyword`. `loadKeyword` accepts an iterator, the value to parse and the object that should be returned.
 The function looks like this
-
+<!--description-->
 ```go
 func loadKeyword(iter *iterator, keyword string, value interface{}) interface{} {
 	for _, val := range keyword {
