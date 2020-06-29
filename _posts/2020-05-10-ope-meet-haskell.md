@@ -2,7 +2,8 @@
 layout: post
 title:  "Ope meet Haskell"
 date:   2020-05-10 12:00:25 +0100
-categories: [programming-language, functional-programming, haskell,]
+tags: [programming-language, functional-programming, haskell,]
+redirect_from: /programming-language/functional-programming/haskell/2020/05/10/ope-meet-haskell.html
 ---
 
 There are two main styles of programming. Imperative Programming and Declarative Programming. Programs written in the imperative style

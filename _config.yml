@@ -14,6 +14,7 @@ description: > # this means to ignore newlines until "baseurl:"
 url: "https://blog.opemipo.dev" # the base hostname & protocol for your site
 twitter_username: opeispo
 github_username:  opethe1st
+permalink: /posts/:year/:month/:day/:title:output_ext
 
 # Build settings
 markdown: kramdown
@@ -23,7 +24,12 @@ kramdown:
 # Third-party services
 # just leave someone empty to disable it
 # google_analytics:
-disqus_shortname:
+disqus_shortname: blog-opemipo-dev
+plugins:
+    - jekyll-feed
+    - jekyll-sitemap
+    - jekyll-seo-tag
+    - jekyll-redirect-from
 
 # used this for post_excerpt at index_page
 excerpt_separator: <!--description-->

@@ -5,15 +5,15 @@ title: Archive
 
 <div>
 
-  <h2>Archive</h2>
+  <h2>Tags</h2>
 
   <section class="archive_list">
-    {% for category in site.categories %}
+    {% for tag in site.tags %}
 
     <div class="category-name">
-      <h2>{{ category | first }}</h2>
+      <h2>{{ tag.first }}</h2>
     </div>
-    {% for post in category.last %}
+    {% for post in tag.last %}
 
     <div class="post_title">
       <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title}}</a>
@@ -26,9 +26,4 @@ title: Archive
 
   </section>
 
-  <footer class="article-footer" mar>
-    {% include author.html %}
-  </footer>
 </div>
-
-

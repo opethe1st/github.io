@@ -2,7 +2,8 @@
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 5 - Summary"
 date:   2019-12-21 14:49:25 +0100
-categories: [Go, Kata, Json, Parser]
+tags: [Go, Kata, Json, Parser]
+redirect_from: /go/kata/json/parser/2019/12/21/json-summary.html
 ---
 
 So what were the main lessons I learned from this?
