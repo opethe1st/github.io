@@ -1,2 +1,4 @@
 ## What's left
-Need to fix the favicon and clean up the bits that don't work. Make this the new theme of my blog.
+* Fix the size of my avatar so it looks nice on mobile ✅
+* Add a categories page
+* When a tag is clicked - it should go to the search page with the search for that tag/category performed
