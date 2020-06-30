@@ -2,12 +2,12 @@
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 2 - Refactoring"
 date:   2019-11-19 14:49:25 +0100
-tags: [Go, Kata, Json, Parser]
+categories: [Go, Json]
 redirect_from: /go/kata/json/parser/2019/11/19/refactoring-json-parser.html
 ---
 
 
-In the previous [post](https://opethe1st.github.io/go/kata/json/parser/2019/10/13/json-parser-in-go.html), I talked about how I wrote a minimal viable parser
+In the previous [post](/posts/2019/10/13/json-parser-in-go.html), I talked about how I wrote a minimal viable parser
 i.e one that could parse in strings, arrays and objects. It works as advertised but I noticed there were a couple of things I could do to improve on the code before I added more features from the JSON specification.
 
 ### Abstractions wanted

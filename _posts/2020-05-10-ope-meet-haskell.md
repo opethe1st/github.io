@@ -2,7 +2,7 @@
 layout: post
 title:  "Ope meet Haskell"
 date:   2020-05-10 12:00:25 +0100
-tags: [programming-language, functional-programming, haskell,]
+categories: [haskell, functional-programming, introduction]
 redirect_from: /programming-language/functional-programming/haskell/2020/05/10/ope-meet-haskell.html
 ---
 

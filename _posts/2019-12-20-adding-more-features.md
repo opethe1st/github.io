@@ -2,11 +2,11 @@
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 3 - More features"
 date:   2019-12-20 14:49:25 +0100
-tags: [Go, Kata, Json, Parser]
+categories: [Golang, Json]
 redirect_from: /go/kata/json/parser/2019/12/20/adding-more-features.html
 ---
 
-In the previous [post](https://opethe1st.github.io/go/kata/json/parser/2019/11/19/refactoring-json-parser.html), I wrote about how I added the iterator abstraction. In this one, I will be discussing how I added new features.
+In the previous [post](/posts/2019/11/19/refactoring-json-parser.html), I wrote about how I added the iterator abstraction. In this one, I will be discussing how I added new features.
 
 # Parsing null, true and false
 The first thing I noticed was that to parse null, true and false, I could use the same function which I called `loadKeyword`. `loadKeyword` accepts an iterator, the value to parse and the object that should be returned.

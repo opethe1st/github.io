@@ -2,12 +2,12 @@
 layout: post
 title:  "How I wrote a JSON parser in Go - Part 4 - Optimization"
 date:   2019-12-20 15:49:25 +0100
-tags: [Go, Kata, Json, Parser]
+categories: [Golang, Json]
 redirect_from: /go/kata/json/parser/2019/12/20/optimization.html
 ---
 
 
-In the last [post](https://opethe1st.github.io/go/kata/json/parser/2019/12/20/adding-more-features.html), I talked about how I implemented all the features in the JSON specification.
+In the last [post](/posts/2019/12/20/adding-more-features.html), I talked about how I implemented all the features in the JSON specification.
 That's nice but I was curious to see how my implementation compared performance wise with the existing standard library implementation.
 
 One of the clues that I had a performance problem was when I tried to compare the time it takes to load two huge strings when my code was at this [state](https://github.com/opethe1st/GoJson/commit/943435f24b71ab954f52d910ed0931816e51ead5).
